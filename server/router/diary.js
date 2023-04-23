@@ -21,7 +21,9 @@ router.post('/',(req,res) => {
   }
   db.query(selectQuery, (err, result) => {
     if(err) console.log("err",err);
-    else {res.send(result)}
+    else {
+      res.send(result)
+    }
   })
 });
 //==============================================
