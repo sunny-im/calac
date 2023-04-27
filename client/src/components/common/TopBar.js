@@ -11,7 +11,7 @@ const TopStateBar = ({ hasSidCookie, session }) => {
   const [totalCountData, setTotalCountData] = useState(false);
   //======================================================
   useEffect(() => {
-    axios.get("http://calac.cafe24app.com/ledger/goal").then((res) => {
+    axios.get("http://calac.cafe24app.com/financialledger/goal").then((res) => {
       setMoney(res.data[0]["money_count"]);
     });
   }, []);
@@ -19,7 +19,7 @@ const TopStateBar = ({ hasSidCookie, session }) => {
   //======================================================
   useEffect(() => {
     axios
-      .get(`http://calac.cafe24app.com/ledger/monthly/total?type=expense`)
+      .get(`http://calac.cafe24app.com/financialledger/monthly/total?type=expense`)
       .then((res) => {
         res.data.length !== 0 && setTotalCountData(res.data[0]["sum_count"]);
       });

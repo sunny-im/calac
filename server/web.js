@@ -10,7 +10,7 @@ const path = require("path");
 // app.use(cors());
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -18,10 +18,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //==============================================
 // 리액트 파일 라우팅
-app.use(express.static(path.join(__dirname, "./build"))); 
-app.get("/*", (req, res)=>{
-    res.sendFile(path.join(__dirname, "./build", "index.html"));
-})
+// app.use(express.static(path.join(__dirname, "./build"))); 
+// app.get("/*", (req, res)=>{
+//     res.sendFile(path.join(__dirname, "./build", "index.html"));
+// })
 //==============================================
 const DASHBOARD = require('./router/main.js');
 app.use('/dashboard',DASHBOARD);
