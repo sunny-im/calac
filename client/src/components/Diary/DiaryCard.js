@@ -222,7 +222,7 @@ const DiaryCard = () => {
                     )}
                   </ContentBox>
                 </MyCardContent>
-                {/* <CommentBox>
+                <CommentBox>
                   {commentCnt.length !== 0 &&
                     commentCnt.map((count, idx) => {
                       return (
@@ -233,7 +233,7 @@ const DiaryCard = () => {
                         )
                       );
                     })}
-                </CommentBox> */}
+                </CommentBox>
               </Box>
             </CardListItem>
           );
