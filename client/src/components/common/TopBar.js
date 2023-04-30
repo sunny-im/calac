@@ -5,7 +5,7 @@ import Weather from "../Main/Weather";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const TopStateBar = ({ hasSidCookie, session }) => {
+const TopBar = ({ hasSidCookie, session }) => {
   const pathname = window.location.pathname;
   const [money, setMoney] = useState(0);
   const [totalCountData, setTotalCountData] = useState(false);
@@ -25,9 +25,9 @@ const TopStateBar = ({ hasSidCookie, session }) => {
       });
   }, []);
   //======================================================
-  const change_money = money
-    .toString()
-    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  // const change_money = money
+  //   .toString()
+  //   .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   const minusGoal = money - totalCountData;
   //======================================================
   return (
@@ -67,7 +67,7 @@ const TopStateBar = ({ hasSidCookie, session }) => {
           <Box>
             <Text>이번달 지출 목표 금액</Text>
             <Text>
-              {change_money}
+              {/* {change_money} */}
               {minusGoal >= 0 ? (
                 <GoalCount sx={{ color: "blue" }}>
                   (-
@@ -122,4 +122,4 @@ const Text = styled("p")({
   fontSize: "16px",
 });
 //======================================================
-export default TopStateBar;
+export default TopBar;

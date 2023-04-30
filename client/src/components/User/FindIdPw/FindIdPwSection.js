@@ -8,10 +8,10 @@ const FindIdPwSection = () => {
   const pathname = window.location.pathname;
   return (
     <FindWrap>
-      {pathname === '/users/findid' && (
+      {pathname === '/login/findid' && (
         <FindIdBox />
       )}
-      {pathname === '/users/findpw' && (
+      {pathname === '/login/findpw' && (
         <FindPwBox />
       )}
     </FindWrap>

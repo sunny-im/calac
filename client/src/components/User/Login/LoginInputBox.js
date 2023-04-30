@@ -59,7 +59,6 @@ const LoginInputBox = () => {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response)
         const { success, message, userInfo } = response.data;
         if (success) {
           alert(`${userInfo.name}님, 환영합니다.`);

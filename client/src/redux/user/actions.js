@@ -1,49 +1,36 @@
-const express = require("express");
-const app = express();
-require("dotenv").config();
-const PORT = 8001;
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const { urlencoded } = require("body-parser");
-const path = require("path");
-//==============================================
-// app.use(cors());
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-  })
-);
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-//==============================================
-// 리액트 파일 라우팅
-// app.use(express.static(path.join(__dirname, "./build"))); 
-// app.get("/*", (req, res)=>{
-//     res.sendFile(path.join(__dirname, "./build", "./index.html"));
-// })
-//==============================================
-const DASHBOARD = require('./router/main.js');
-app.use('/dashboard',DASHBOARD);
+import { SET_HAS_SID_COOKIE, SET_SESSION } from "./types";
+import axios from "axios";
 
-const LEDGER = require("./router/financialledger.js");
-app.use("/financialledger", LEDGER); 
-
-const DIARY = require("./router/diary.js");
-app.use("/diary", DIARY);
-
-// const COMMENTS = require("./router/comments.js");
-// app.use("/comments", COMMENTS);
-
-const SCHEDULER = require("./router/scheduler.js");
-app.use("/scheduler", SCHEDULER);
-
-const USERS = require("./router/login.js");
-app.use("/login", USERS);
-
-// images 폴더 내의 파일들을 외부로 노출 시켜주기 위한 미들웨어
-app.use("/images", express.static(path.join(__dirname, "/images")));
-//==============================================
-app.listen(PORT, () => {
-  console.log(`running on port ${PORT}`);
+export const setHasSidCookie = (hasSidCookie) => ({
+  type: SET_HAS_SID_COOKIE,
+  payload: hasSidCookie,
 });
+
+// 세션객체를 받아오는 액션
+export const getSession = () => (dispatch) => {
+  if (!getCookie("sid")) return;
+  axios
+    .get("http://calac.cafe24app.com/login/user-info", {
+      // 브라우저에 저장되어있는 쿠키를 참조해서 권한 획득
+      headers: {
+        Authorization: `Bearer ${getCookie("sid")}`,
+      },
+      // 서버와 포트가 달라 CORS를 사용했기 때문에 withCredentials 명시해야함.
+      //이 속성을 true로 설정하면 브라우저는 쿠키를 포함한 인증 정보를 서버에게 전달
+      withCredentials: true,
+    })
+    .then((res) => {
+      dispatch({ type: SET_SESSION, payload: res.data });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// 브라우저에 저장된 쿠키를 받아오는 함수  =========================
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+}
+//=================================================================

@@ -4,7 +4,7 @@ import { ResponsivePie } from "@nivo/pie";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 
-const FinalncialLedgerDonut = () => {
+const LedgerDonut = () => {
   const [monthlyDonutData, setMonthlyDountData] = useState([]);
   //======================================================
   useEffect(() => {
@@ -136,4 +136,4 @@ const DountTitle = styled(Typography)({
   marginBottom: "20px",
 });
 //======================================================
-export default FinalncialLedgerDonut;
+export default LedgerDonut;
