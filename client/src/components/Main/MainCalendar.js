@@ -53,7 +53,7 @@ const MainCalendar = ({ isLoggedIn, userInfo }) => {
     <SectionCalendar container>
       <CalendarLeft item xs={8}>
         <CalendarWrap>
-          <Calendar 
+          <Calendar
             onChange={onChange}
             value={value}
             calendarType='US'
