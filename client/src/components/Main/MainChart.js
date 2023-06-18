@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, Link } from "@mui/material";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import CircleIcon from '@mui/icons-material/Circle';
 import { styled } from "@mui/material/styles";
 import axios from "axios";
-
 
 const MainChart = () => {
   const data = [
@@ -92,6 +91,7 @@ const MainChart = () => {
           const isLastItem = idx === diary.length - 1;
           return (
             <EntryBox key={idx} className='test'>
+              <DiaryLink href="/diary">
               <TitleBox>
                 <CircleIcon sx={{ fontSize: 5 }}/>
                 <TitleTypography>{item.title}</TitleTypography>
@@ -101,7 +101,7 @@ const MainChart = () => {
                 <Typography>{item.createdAt.substr(0,10)}</Typography>
               </DiaryBox>
               {isLastItem ? null : <RightDivider/>}
-              {/* <RightDivider/> */}
+              </DiaryLink>
             </EntryBox> 
           )
         })}
@@ -137,6 +137,10 @@ const RightTypography = styled(Typography)({
 });
 const EntryBox = styled(Box)({
   height: '30%',
+});
+const DiaryLink = styled(Link)({
+  color: '#333',
+  '&:hover': { color: '#07553B' },
 });
 const TitleBox = styled(Box)({
   display: 'flex',
